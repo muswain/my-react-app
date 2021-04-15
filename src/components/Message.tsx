@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, makeStyles } from "@material-ui/core";
 import DeleteIcon from "@material-ui/icons/Delete";
 
@@ -17,6 +17,14 @@ const Message = (props: MessageProps) => {
   const classes = useStyles();
   const [count, setCount] = useState(props.value);
   const [message, setMessage] = useState(props.message);
+
+  useEffect(() => {
+    console.log("I have just mounted!");
+
+    return () => {
+      console.log("unmounting");
+    };
+  }, []);
 
   return (
     <div>
