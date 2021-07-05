@@ -1,11 +1,7 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer, useState } from "react";
 import { Button, makeStyles } from "@material-ui/core";
-import DeleteIcon from "@material-ui/icons/Delete";
-
-interface MessageProps {
-  message: string;
-  value: number;
-}
+import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -13,10 +9,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Message = (props: MessageProps) => {
+const initialState = { count: 10 };
+type Action = { type: "plus" } | { type: "minus" };
+type State = {
+  count: number;
+};
+
+const reducer = (state: State, action: Action) => {
+  switch (action.type) {
+    case "plus":
+      return { count: state.count + 1 };
+    case "minus":
+      return { count: state.count - 1 };
+    default:
+      return { ...state };
+  }
+};
+
+const Message = () => {
   const classes = useStyles();
-  const [count, setCount] = useState(props.value);
-  const [message, setMessage] = useState(props.message);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     console.log("I have just mounted!");
@@ -28,19 +40,28 @@ const Message = (props: MessageProps) => {
 
   return (
     <div>
-      <h2>Message is: {message}</h2>
-      <h2>Clicked count is: {count}</h2>
+      <h2>Clicked count is: {state.count}</h2>
       <Button
         color="primary"
         variant="contained"
         className={classes.button}
-        startIcon={<DeleteIcon />}
+        startIcon={<AddIcon />}
         onClick={() => {
-          setCount(count + 1);
-          setMessage(`counter being incremented to: ${count}`);
+          dispatch({ type: "plus" });
         }}
       >
         Click to Increment
+      </Button>
+      <Button
+        color="primary"
+        variant="contained"
+        className={classes.button}
+        startIcon={<RemoveIcon />}
+        onClick={() => {
+          dispatch({ type: "minus" });
+        }}
+      >
+        Click to Decrement
       </Button>
     </div>
   );
