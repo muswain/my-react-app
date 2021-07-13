@@ -1,7 +1,9 @@
-import { useEffect, useReducer, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { Button, makeStyles } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import RemoveIcon from "@material-ui/icons/Remove";
+import { reducer } from "../providers/count-reducer";
+import { TextField } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -9,26 +11,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initialState = { count: 10 };
-type Action = { type: "plus" } | { type: "minus" };
-type State = {
-  count: number;
-};
-
-const reducer = (state: State, action: Action) => {
-  switch (action.type) {
-    case "plus":
-      return { count: state.count + 1 };
-    case "minus":
-      return { count: state.count - 1 };
-    default:
-      return { ...state };
-  }
-};
-
 const Message = () => {
   const classes = useStyles();
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, { count: 10 });
 
   useEffect(() => {
     console.log("I have just mounted!");
@@ -63,6 +48,18 @@ const Message = () => {
       >
         Click to Decrement
       </Button>
+      <TextField
+        id="outlined-basic"
+        type="number"
+        label="Set Value"
+        variant="outlined"
+        onChange={(e) => {
+          dispatch({
+            type: "setValue",
+            payload: { value: Number(e.target.value) },
+          });
+        }}
+      />
     </div>
   );
 };
