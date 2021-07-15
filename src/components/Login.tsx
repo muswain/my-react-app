@@ -1,6 +1,4 @@
-import { TextField } from "@material-ui/core";
-import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
+import { TextField, Box, Button } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
@@ -16,7 +14,7 @@ export const Login = () => {
   const classes = useStyles();
 
   return (
-    <Box>
+    <Box flexDirection="row">
       <form className={classes.root} noValidate autoComplete="off">
         <TextField
           id="outlined-basic"
@@ -30,6 +28,9 @@ export const Login = () => {
           variant="outlined"
           required
         />
+        <Button variant="contained" color="primary">
+          Primary
+        </Button>
       </form>
     </Box>
   );
