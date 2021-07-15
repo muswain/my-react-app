@@ -1,12 +1,7 @@
-import { Link, Route } from "react-router-dom";
+import { Link, Route, Switch } from "react-router-dom";
 import "./App.css";
+import { Login } from "./Login";
 //import Message from "./Message";
-
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
 
 const Category = () => (
   <div>
@@ -38,8 +33,9 @@ const App = () => {
       </nav>
 
       {/* Route components are rendered if the path prop matches the current URL */}
-      <Route path="/">
-        <Home />
+
+      <Route path="/" exact>
+        <Login />
       </Route>
       <Route path="/category">
         <Category />
