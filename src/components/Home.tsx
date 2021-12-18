@@ -1,6 +1,6 @@
 interface MessageProps {
-  message: string;
-  value: number;
+	message: string;
+	value: number;
 }
 
 const Home = (props: MessageProps) => {};

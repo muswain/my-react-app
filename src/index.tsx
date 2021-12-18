@@ -7,10 +7,10 @@ import theme from './theme';
 import { ThemeProvider } from '@mui/material';
 
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
-    <BrowserRouter>
-      <App />,
-    </BrowserRouter>
-  </ThemeProvider>,
-  document.getElementById('root')
+	<ThemeProvider theme={theme}>
+		<BrowserRouter>
+			<App />,
+		</BrowserRouter>
+	</ThemeProvider>,
+	document.getElementById('root')
 );
