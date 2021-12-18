@@ -1,6 +1,6 @@
-import { Link, Route, Switch } from "react-router-dom";
-import "./App.css";
-import { Login } from "./Login";
+import { Link, Route } from 'react-router-dom';
+import './App.css';
+import { Login } from './Login';
 //import Message from "./Message";
 
 const Category = () => (
@@ -34,7 +34,7 @@ const App = () => {
 
       {/* Route components are rendered if the path prop matches the current URL */}
 
-      <Route path="/" exact>
+      <Route path="/">
         <Login />
       </Route>
       <Route path="/category">
